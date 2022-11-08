@@ -44,8 +44,7 @@ def imagetable(
         sortable=False,
 
         # 3d model viewer
-        auto_rotate=False,
-        camera_controls=True,
+        model_viewer_opts=None,
     ):
 
     thumbnail_generators = []
@@ -193,7 +192,8 @@ def imagetable(
                 script(text('$(function(){$(".tablesorter").tablesorter(' + ts_opts + ');});', escape=False))
             
             if use_model_viewer:
-                model_viewer_opts = {'auto-rotate': auto_rotate, 'camera-controls': camera_controls}
+                if model_viewer_opts is None:
+                    model_viewer_opts = {}
                 script(type="module", src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js")
 
             css = '' # custom CSS
